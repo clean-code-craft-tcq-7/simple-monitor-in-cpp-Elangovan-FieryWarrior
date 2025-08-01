@@ -16,16 +16,19 @@ void showAlert(const char* message) {
   }
 }
 
+bool checkRange(float value, float min, float max) {
+    return value >= min && value <= max;
+
 int vitalsOk(float temperature, float pulseRate, float spo2) {
-  if (temperature > 102 || temperature < 95) {
+  if (!checkRange(temperature, 95, 102)) {
     showAlert("Temperature is critical!");
     return 0;
   }
-  if (pulseRate < 60 || pulseRate > 100) {
+  if (!checkRange(pulseRate, 60, 100)) {
     showAlert("Pulse Rate is out of range!");
     return 0;
   }
-  if (spo2 < 90) {
+  if (!checkRange(spo2, 90, 1000)) {
     showAlert("Oxygen Saturation out of range!");
     return 0;
   }
